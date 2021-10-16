@@ -27,6 +27,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     field: {
+        fontSize: '10px',
+        height: "20px",
         borderRadius: '4px',
         border: '1px solid',
         "&:hover": {
@@ -65,7 +67,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const initialValues = {
-    name: '',
+
     email: '',
     password: ''
 }
@@ -76,7 +78,7 @@ const onSubmit = values => {
 
 const validationSchema = Yup.object({
     email: Yup.string().email("invalid email").required(" email required"),
-    password: Yup.string().required(" password required")
+    password: Yup.string().min(8, "Password must be 8 characters").required(" password required")
 })
 
 function Login() {
@@ -97,6 +99,7 @@ function Login() {
                         id='email'
                         type="email"
                         name="email"
+                        placeholder = "asgar@gmail.com"
                     />
                 </div>
                 <div className={classes.error}><ErrorMessage name="email" /></div>
@@ -109,13 +112,14 @@ function Login() {
                         id="password"
                         type="password"
                         name="password"
+                    placeholder = "********"
                     />
                 </div>
                 <div className={classes.error}><ErrorMessage name="password" /> </div>
 
                 <div className={classes.btn}>
-                    <Button type="submit" className={classes.submitBtn}>submit</Button>
                     <Button type="reset" className={classes.submitBtn}>reset</Button>
+                    <Button type="submit" className={classes.submitBtn}>submit</Button>
                 </div>
             </Form>
         </Formik>
